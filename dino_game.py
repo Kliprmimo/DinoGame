@@ -8,6 +8,8 @@ character = pygame.transform.scale(character, (120, 170))   # 150x220
 background_graveyard_1 = pygame.image.load('graphics/background_1.png').convert_alpha()   # 1863x455
 background_graveyard_2 = background_graveyard_1
 ground = pygame.image.load('graphics/ground.png').convert_alpha()   # 1387x180
+grave = pygame.image.load('graphics/grave.png').convert_alpha()    # 800x840
+grave = pygame.transform.scale(grave, (100, 105))
 background = pygame.Surface((1280, 720))
 background.fill('grey')
 game_clock = pygame.time.Clock()
@@ -17,7 +19,8 @@ ground_x_coord = 0
 game_speed = 6
 jump = 0
 player_x_coord = 650
-
+player_x_coord_change = 24
+i = 0
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -39,6 +42,8 @@ while True:
     ground_2_rect = ground.get_rect(bottomleft=(ground_x_coord+1387, 770))
     screen.blit(ground, ground_2_rect)
 
+    screen.blit(grave, (0, 0))
+
     character_rect = character.get_rect(bottomleft=(20, player_x_coord))
     screen.blit(character, character_rect)
 
@@ -54,6 +59,23 @@ while True:
     # jump
     if keys[pygame.K_SPACE] and game_speed != 0:
         jump = 1
+
+    if jump:
+        if i < 30:
+            i += 1
+            player_x_coord_change -= 0.8
+            player_x_coord -= player_x_coord_change
+        if i == 30:
+            player_x_coord_change = 0
+            i += 1
+        if 30 < i < 60:
+            i += 1
+            player_x_coord_change += 0.8
+            player_x_coord += player_x_coord_change
+        if i == 60:
+            jump = 0
+            i = 0
+            player_x_coord_change = 24
 
     pygame.display.update()
     game_clock.tick(60)
