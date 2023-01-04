@@ -90,6 +90,10 @@ while True:
         if event.type == pygame.QUIT:
             pygame.quit()
             exit()
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_ESCAPE:
+                pygame.quit()
+                exit()
 
     keys = pygame.key.get_pressed()
     screen.blit(background, (0, 0))
