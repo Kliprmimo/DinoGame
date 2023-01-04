@@ -46,7 +46,8 @@ def spawn_grave():
 
 def grave_move(grave_list_inner):
     if grave_list_inner:
-        grave_list_inner = [grave_x_coord_list - game_speed for grave_x_coord_list in grave_list if grave_x_coord_list >= -100]
+        grave_list_inner = [grave_x_coord_list - game_speed for grave_x_coord_list in grave_list if
+                            grave_x_coord_list >= -100]
         return grave_list_inner
 
 
@@ -57,7 +58,7 @@ def show_grave(grave_list_inner):
             pygame.draw.circle(grave, (255, 255, 255), (grave_list_x_coord + 55, 595), radius)
 
 
-def grave_collision(rleft, rbottom, width, height, center_x, center_y, radius_i):
+def grave_collision(rbottom, center_x):
     distance_x_mid_r = center_x - 220
     distance_y_mid_r = 650 - rbottom
     distance_x_bot_r = center_x - 220
@@ -82,7 +83,7 @@ def grave_collision(rleft, rbottom, width, height, center_x, center_y, radius_i)
 def detect_grave_collision(grave_list_inner):
     if grave_list_inner:
         for grave_list_x_coord in grave_list_inner:
-            return grave_collision(100, player_y_coord, 120, 170, grave_list_x_coord + 55, 595, radius)
+            return grave_collision(player_y_coord, grave_list_x_coord + 55, )
 
 
 while True:
